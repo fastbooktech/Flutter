@@ -1,0 +1,28 @@
+
+//1. 클래스 선언
+class Book{
+  //2. 클래스 요소 선언
+  String title;
+  int page;
+  
+  //3. 제목, 페이지수 받기
+  Book(int n, String input){
+    this.page = n;
+    this.title = input;
+  }
+  //4. 페이지가 250을 넘는지 확인
+  bool over250(){
+    return this.page>250;
+  }
+}
+
+void main(){
+//1. 클래스 호출
+  Book hp = Book(300, "harrypotter");
+  Book lk = Book (234, "lord King");
+//2. 출력
+  print(hp.page);
+  print(lk.page);
+  print(hp.over250());
+  print(lk.over250());
+}
