@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:listview1/view/insert_list.dart';
+import 'package:listview1/view/table_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,85 +13,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
-      home: const Quiz(),
+      debugShowCheckedModeBanner: false,
+
+      initialRoute: '/',
+      //map으로 되어있고, string, widget function을 갖는다
+      routes: {
+        //'/' : (context) => TableList() 얘랑 (context) {return} 이랑 같음
+        //시작페이지. 기준점. root페이지.
+        '/': (context) => const TableList(),
+        //다음페이지
+        '/insert': (context) {
+          //여기에 다른 코드들 다 쓰고
+          return const InsertList();
+        }
+      },
     );
   }
 }
 
-class Quiz extends StatelessWidget {
-  const Quiz({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.amber[800],
-      appBar: AppBar(
-        title: const Text('Image EX01'),
-        backgroundColor: Colors.green,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(120, 0, 0, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.all(23.0),
-                    child: CircleAvatar(
-                      radius: 40,
-                      backgroundImage: AssetImage(
-                        'pikachus_image/pikachu-1.jpg',
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(23.0),
-                    child: CircleAvatar(
-                      radius: 40,
-                      backgroundImage: AssetImage(
-                        'pikachus_image/pikachu-1.jpg',
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.all(23.0),
-                    child: CircleAvatar(
-                      radius: 40,
-                      backgroundImage: AssetImage(
-                        'pikachus_image/pikachu-2.jpg',
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(23.0),
-                    child: CircleAvatar(
-                      radius: 40,
-                      backgroundImage: AssetImage(
-                        'pikachus_image/pikachu-3.jpg',
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+//page 두개이므로 router 사용. 둘다써도 되는데 이번엔 하나만 쓸 예정.
