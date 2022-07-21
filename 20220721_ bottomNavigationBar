@@ -1,0 +1,62 @@
+import 'dart:html';
+
+import 'package:flutter/material.dart';
+import 'package:instagram/style.dart' as theme_style;
+
+void main() {
+  //stl 상위로 material 있어야 좋음
+  runApp( MaterialApp(
+    //css 모아놓기
+      theme:theme_style.theme,
+      home:const MyApp()));
+}
+
+// 위젯 담을 변수는 위젯 밖에
+var a =0;
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      //1. appbar
+      appBar: AppBar(
+        toolbarHeight: 45,
+          leadingWidth: 120,
+          leading: const Padding(
+            padding:  EdgeInsets.all(8.0),
+            child: Text("Instagram", style : TextStyle(
+                fontSize : 18, fontWeight: FontWeight.normal, color: Colors.black87)),
+          ),
+          actions: [IconButton(
+              icon : const Icon(Icons.add_box_outlined),
+              onPressed: (){
+                a=a++;
+              },
+              iconSize: 30,
+          ),],),
+      // body: const TextButton(onPressed: (){}, child: Text('an nyoung')),
+      body:  Center(child: Text('Practicing bottom navigation bar', style : Theme.of(context).textTheme.bodyText1)),
+      bottomNavigationBar: BottomNavigationBar(
+        type:BottomNavigationBarType.fixed,
+        backgroundColor: Colors.pink,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white54,
+        items:const [
+          BottomNavigationBarItem(
+            icon:Icon(Icons.home_outlined),
+            label : 'home'
+          ),
+          BottomNavigationBarItem(
+            icon:Icon(Icons.shopping_bag_outlined),
+            label : 'cart'
+          ),
+          BottomNavigationBarItem(
+              icon:Icon(Icons.add_box_outlined),
+              label : 'add'
+          ),
+        ]
+
+      ),
+    );
+  }
+}
