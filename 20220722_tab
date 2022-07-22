@@ -1,0 +1,77 @@
+import 'dart:html';
+import 'package:flutter/material.dart';
+import 'package:instagram/style.dart' as theme_style;
+
+void main() {
+  runApp( MaterialApp(
+      theme:theme_style.theme,
+      home:const MyApp()));
+}
+
+var a =0;
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  //1. state definition
+  var tab =0;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      //1) appbar
+      appBar: AppBar(
+        toolbarHeight: 45,
+          leadingWidth: 120,
+          leading: const Padding(
+            padding:  EdgeInsets.all(8.0),
+            child: Text("Blue marine", style : TextStyle(
+                fontSize : 18, fontWeight: FontWeight.normal, color: Colors.black87)),
+          ),
+          actions: [IconButton(
+              icon : const Icon(Icons.add_box_outlined),
+              onPressed: (){
+                a=a++;
+              },
+              iconSize: 30,
+          ),],),
+      
+      // 2) body
+      body:  [Center(child: Text('this is the home screen', style : Theme.of(context).textTheme.bodyText1)),Center(child: Text('this is the favorite screen', style : Theme.of(context).textTheme.bodyText1)),Center(child: Text('this is the added screen', style : Theme.of(context).textTheme.bodyText1)),][tab],
+      
+      //3) bottom navi
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white70,
+        // to hide the labels of each icon
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+          unselectedItemColor: const Color.fromRGBO(109, 184, 200, 50),
+          //bottom navigation bar에서 버튼의 onPressed같은 기능
+        onTap: (i){
+          debugPrint('you have pressed the button $i');
+          setState((){
+            tab=i++;
+          });
+        },
+        items:const [
+          BottomNavigationBarItem(
+            icon:Icon(Icons.home_outlined),
+            label : 'home'
+          ),
+          BottomNavigationBarItem(
+            icon:Icon(Icons.favorite_border_outlined),
+            label : 'cart'
+          ),
+          BottomNavigationBarItem(
+              icon:Icon(Icons.add_box_outlined),
+              label : 'add'
+          ),
+        ]
+
+      ),
+    );
+  }
+}
